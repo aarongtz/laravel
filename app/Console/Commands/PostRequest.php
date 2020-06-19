@@ -21,6 +21,8 @@ use Psr\Http\Message\ResponseInterface;
 
 use Illuminate\Support\Facades\Log;
 
+use App\Jobs\SendRequests;
+
 class PostRequest extends Command
 {
     /**
@@ -134,6 +136,20 @@ class PostRequest extends Command
 		
 		// Force ALL requests to complete.
 		$promise->wait();
+		
+		
+		
+		
+		/*
+			You could also dispatch a queued job for this, 
+			but I think that for this case that involves sending HTTP requests (sending email would be a better use, for example), 
+			queuing this process loses a bit of sense because the requests are being sent in the
+			above code asynchronously already, so I'll be running an asynchronous process ( the promise ) in an asynchronous way ( queue ):
+		*/
+		
+		
+		//Job sent to a queue called "requests", in this case, I'll be using database driver:
+		SendRequests::dispatch()->onQueue('requests');
 		
 		
     }
