@@ -141,7 +141,7 @@ class PostRequest extends Command
 		
 		
 		/*
-			You could also dispatch a queued job for this, 
+			You could also dispatch a queued job for this question 5, 
 			but I think that for this case that involves sending HTTP requests (sending email would be a better use, for example), 
 			queuing this process loses a bit of sense because the requests are being sent in the
 			above code asynchronously already, so I'll be running an asynchronous process ( the promise ) in an asynchronous way ( queue ):
